@@ -1,0 +1,6 @@
+*.jpg
+CascadeDataCollection/debug/
+CascadeDataCollection/Makefile.Release
+CascadeDataCollection/Makefile.Debug
+CascadeDataCollection/.qmake.stash
+CascadeDataCollection/Makefile
