@@ -61,7 +61,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(450, 498);
+        MainWindow->resize(450, 517);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -98,11 +98,13 @@ public:
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         PositiveLineEdit = new QLineEdit(groupBox_2);
         PositiveLineEdit->setObjectName(QStringLiteral("PositiveLineEdit"));
+        PositiveLineEdit->setEnabled(false);
 
         gridLayout_3->addWidget(PositiveLineEdit, 0, 0, 1, 1);
 
         PositiveLoadButton = new QPushButton(groupBox_2);
         PositiveLoadButton->setObjectName(QStringLiteral("PositiveLoadButton"));
+        PositiveLoadButton->setMinimumSize(QSize(120, 0));
 
         gridLayout_3->addWidget(PositiveLoadButton, 0, 1, 1, 1);
 
@@ -125,7 +127,7 @@ public:
         spinBox_Rotation->setObjectName(QStringLiteral("spinBox_Rotation"));
         spinBox_Rotation->setEnabled(false);
         spinBox_Rotation->setMinimum(100);
-        spinBox_Rotation->setMaximum(1000);
+        spinBox_Rotation->setMaximum(100000);
 
         gridLayout_3->addWidget(spinBox_Rotation, 1, 1, 1, 1);
 
@@ -133,7 +135,7 @@ public:
         spinBox_Light->setObjectName(QStringLiteral("spinBox_Light"));
         spinBox_Light->setEnabled(false);
         spinBox_Light->setMinimum(100);
-        spinBox_Light->setMaximum(1000);
+        spinBox_Light->setMaximum(100000);
 
         gridLayout_3->addWidget(spinBox_Light, 2, 1, 1, 1);
 
@@ -141,7 +143,7 @@ public:
         spinBox_Deformation->setObjectName(QStringLiteral("spinBox_Deformation"));
         spinBox_Deformation->setEnabled(false);
         spinBox_Deformation->setMinimum(100);
-        spinBox_Deformation->setMaximum(1000);
+        spinBox_Deformation->setMaximum(100000);
 
         gridLayout_3->addWidget(spinBox_Deformation, 3, 1, 1, 1);
 
@@ -156,12 +158,18 @@ public:
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         NegativeLineEdit = new QLineEdit(groupBox);
         NegativeLineEdit->setObjectName(QStringLiteral("NegativeLineEdit"));
+        NegativeLineEdit->setEnabled(false);
 
         gridLayout_2->addWidget(NegativeLineEdit, 0, 0, 1, 2);
 
         NegativeLoadButton = new QPushButton(groupBox);
         NegativeLoadButton->setObjectName(QStringLiteral("NegativeLoadButton"));
-        NegativeLoadButton->setMaximumSize(QSize(113, 16777215));
+        QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(NegativeLoadButton->sizePolicy().hasHeightForWidth());
+        NegativeLoadButton->setSizePolicy(sizePolicy2);
+        NegativeLoadButton->setMaximumSize(QSize(120, 16777215));
 
         gridLayout_2->addWidget(NegativeLoadButton, 0, 2, 1, 1);
 
@@ -169,7 +177,7 @@ public:
         spinBox_NegativeGenerate->setObjectName(QStringLiteral("spinBox_NegativeGenerate"));
         spinBox_NegativeGenerate->setEnabled(false);
         spinBox_NegativeGenerate->setMinimum(100);
-        spinBox_NegativeGenerate->setMaximum(1000);
+        spinBox_NegativeGenerate->setMaximum(500000);
 
         gridLayout_2->addWidget(spinBox_NegativeGenerate, 1, 2, 1, 1);
 
@@ -204,11 +212,11 @@ public:
         generateButton->setText(QApplication::translate("MainWindow", "Generate", Q_NULLPTR));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Positive Data Generate", Q_NULLPTR));
         PositiveLoadButton->setText(QApplication::translate("MainWindow", "Positive Images Folder", Q_NULLPTR));
-        checkBox_Rotation->setText(QApplication::translate("MainWindow", "Rotation", Q_NULLPTR));
-        checkBox_Light->setText(QApplication::translate("MainWindow", "Light Change between + 30 Degrees and - 30 Degrees", Q_NULLPTR));
+        checkBox_Rotation->setText(QApplication::translate("MainWindow", "Rotation between + 30 Degrees and - 30 Degrees", Q_NULLPTR));
+        checkBox_Light->setText(QApplication::translate("MainWindow", "Light Change", Q_NULLPTR));
         checkBox_Deformation->setText(QApplication::translate("MainWindow", "3D Deformation Maximum Angles 30 Degrees", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "Negative Data Generate", Q_NULLPTR));
-        NegativeLoadButton->setText(QApplication::translate("MainWindow", "Negative URL Folder", Q_NULLPTR));
+        NegativeLoadButton->setText(QApplication::translate("MainWindow", "Negative Images Folder", Q_NULLPTR));
     } // retranslateUi
 
 };

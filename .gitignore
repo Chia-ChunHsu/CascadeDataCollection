@@ -4,3 +4,6 @@ CascadeDataCollection/Makefile.Release
 CascadeDataCollection/Makefile.Debug
 CascadeDataCollection/.qmake.stash
 CascadeDataCollection/Makefile
+*.bmp
+CascadeDataCollection/release/
+*.txt

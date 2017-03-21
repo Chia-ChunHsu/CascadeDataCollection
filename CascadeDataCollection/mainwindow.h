@@ -6,6 +6,7 @@
 #include <QMetaType>
 #include <generatedata.h>
 #include <opencv.hpp>
+#include <QTextStream>
 namespace Ui {
 class MainWindow;
 }
@@ -39,6 +40,8 @@ private slots:
 
     void getNegImage(cv::Mat neg);
 
+    void processingEnding();
+
 private:
     Ui::MainWindow *ui;
     QStringList posListNames;
@@ -46,6 +49,10 @@ private:
     GenerateData *generateData;
     int pos_name;
     int neg_name;
+    QFile *posfile = 0;
+    QTextStream *postext = 0;
+    QFile *negfile = 0;
+    QTextStream *negtext = 0;
 };
 Q_DECLARE_METATYPE(cv::Mat)
 #endif // MAINWINDOW_H

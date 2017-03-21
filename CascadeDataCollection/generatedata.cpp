@@ -60,6 +60,7 @@ void GenerateData::run()
         emit sendProgress(i*negGap);
     }
     emit sendProgress(100);
+    emit sendLog("Generating Negative Data ia Completed!");
 }
 
 cv::Mat GenerateData::RotateImage()
@@ -69,28 +70,75 @@ cv::Mat GenerateData::RotateImage()
     //Load Target Image
     cv::Mat targetImage = cv::imread(_posList[targetImageID].toStdString(),cv::IMREAD_COLOR);
     //Randonly choose rotate angle
-    int angle = rand()%60; //Set 0 as -30 degrees, and set 59 as +30 degrees
+    int angle = rand()%61; //Set 0 as -30 degrees, and set 59 as +30 degrees
+    //double scale = double(rand()%20)*0.1+;
+    double scale = 1.0;
     cv::Mat result;
     cv::Point center(targetImage.cols/2,targetImage.rows/2);
-    cv::Mat rotationMatrix = cv::getRotationMatrix2D(center,angle,1.0);
-    cv::warpAffine(targetImage,result,rotationMatrix,cv::Size(targetImage.cols*1.2,targetImage.rows*1.2));
+    cv::Mat rotationMatrix = cv::getRotationMatrix2D(center,angle-30,scale);
+    cv::warpAffine(targetImage,result,rotationMatrix,cv::Size(targetImage.cols,targetImage.rows*1.3));
     return result;
 }
 
 cv::Mat GenerateData::LightImage()
 {
-    cv::Mat temp;
-    return temp;
+    cv::Mat result;
+    int targetImageID = rand()%_posList.size();
+    //Load Target Image
+    cv::Mat targetImage = cv::imread(_posList[targetImageID].toStdString(),cv::IMREAD_COLOR);
+    double alpha = double(rand()%20)*0.1+1.0;
+    double beta = double(rand()%101);
+    targetImage.convertTo(result,-1,alpha,beta);
+    return result;
 }
 
 cv::Mat GenerateData::DeformationImage()
 {
-    cv::Mat temp;
-    return temp;
+    //Choose ID
+    int targetImageID = rand()%_posList.size();
+    //Load Target Image
+    cv::Mat targetImage = cv::imread(_posList[targetImageID].toStdString(),cv::IMREAD_COLOR);
+    cv::Point2f srcTri[3];
+    cv::Point2f dstTri[3];
+    cv::Mat warpMat(2,3,CV_32FC1)   ;
+    cv::Mat warpDst =cv::Mat::zeros(targetImage.rows,targetImage.cols,targetImage.type());
+
+    srcTri[0] = cv::Point2f(0,0);
+    srcTri[1] = cv::Point2f(targetImage.cols-1.f,0);
+    srcTri[2] = cv::Point2f(0,targetImage.rows-1.f);
+
+    float x0,y0;
+    float x1,y1;
+    float x2,y2;
+    x0 = float(rand()%30*0.01)+0.0;
+    x1 = float(rand()%20*0.01)+0.8;
+    x2 = float(rand()%30*0.01)+0.0;
+    y0 = float(rand()%30*0.01)+0.0;
+    y1 = float(rand()%30*0.01)+0.0;
+    y2 = float(rand()%20*0.01)+0.8;
+
+    dstTri[0] = cv::Point2f( targetImage.cols*x0, targetImage.rows*y0 );
+    dstTri[1] = cv::Point2f( targetImage.cols*x1, targetImage.rows*y1 );
+    dstTri[2] = cv::Point2f( targetImage.cols*x2, targetImage.rows*y2 );
+
+    warpMat = cv::getAffineTransform(srcTri,dstTri);
+    cv::warpAffine(targetImage,warpDst,warpMat,warpDst.size());
+
+    return warpDst;
 }
 
 cv::Mat GenerateData::NegImage()
 {
-    cv::Mat temp;
-    return temp;
+    cv::Mat result;
+    //Choose ID
+    int targetImageID = rand()%_negList.size();
+    //Load Target Image
+    cv::Mat targetImage = cv::imread(_negList[targetImageID].toStdString(),cv::IMREAD_COLOR);
+    //Random Size, Random Case
+    cv::Size size(rand()%targetImage.cols,rand()%targetImage.rows);
+    int x = rand()%(targetImage.cols-size.width);
+    int y = rand()%(targetImage.rows-size.height);
+    cv::Rect ROI(x,y,size.width,size.height);
+    result = targetImage(ROI).clone();
+    return result;
 }
