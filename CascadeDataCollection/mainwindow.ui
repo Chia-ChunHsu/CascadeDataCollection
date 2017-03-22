@@ -73,7 +73,7 @@
        <item row="1" column="0">
         <widget class="QCheckBox" name="checkBox_Rotation">
          <property name="text">
-          <string>Rotation between + 30 Degrees and - 30 Degrees</string>
+          <string>Rotation between + 15 Degrees and - 15 Degrees</string>
          </property>
         </widget>
        </item>
@@ -87,7 +87,7 @@
        <item row="3" column="0">
         <widget class="QCheckBox" name="checkBox_Deformation">
          <property name="text">
-          <string>3D Deformation Maximum Angles 30 Degrees</string>
+          <string>3D Deformation Maximum</string>
          </property>
         </widget>
        </item>

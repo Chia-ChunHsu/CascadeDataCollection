@@ -212,9 +212,9 @@ public:
         generateButton->setText(QApplication::translate("MainWindow", "Generate", Q_NULLPTR));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Positive Data Generate", Q_NULLPTR));
         PositiveLoadButton->setText(QApplication::translate("MainWindow", "Positive Images Folder", Q_NULLPTR));
-        checkBox_Rotation->setText(QApplication::translate("MainWindow", "Rotation between + 30 Degrees and - 30 Degrees", Q_NULLPTR));
+        checkBox_Rotation->setText(QApplication::translate("MainWindow", "Rotation between + 15 Degrees and - 15 Degrees", Q_NULLPTR));
         checkBox_Light->setText(QApplication::translate("MainWindow", "Light Change", Q_NULLPTR));
-        checkBox_Deformation->setText(QApplication::translate("MainWindow", "3D Deformation Maximum Angles 30 Degrees", Q_NULLPTR));
+        checkBox_Deformation->setText(QApplication::translate("MainWindow", "3D Deformation Maximum", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "Negative Data Generate", Q_NULLPTR));
         NegativeLoadButton->setText(QApplication::translate("MainWindow", "Negative Images Folder", Q_NULLPTR));
     } // retranslateUi
