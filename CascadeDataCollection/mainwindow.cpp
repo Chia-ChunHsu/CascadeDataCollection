@@ -86,17 +86,6 @@ void MainWindow::on_generateButton_clicked()
     if(!QDir("newData/Pos").exists())
         QDir().mkdir("newData/Pos");
 
-    if(posEnable)
-    {
-//        posfile = new QFile("newData/Pos/Info.txt");
-//        if(!posfile->open(QIODevice::WriteOnly))
-//        {
-//            ui->LogTextBrowser->append("Error occured in Open Info.txt File");
-//            return;
-//        }
-//        postext = new QTextStream(posfile);
-    }
-
     ui->LogTextBrowser->append("Need To Generate: "+posGenerate);
     ui->LogTextBrowser->append("Total Pos Num: "+QString::number(PosNum));
     ui->LogTextBrowser->append("Rotate Data Num: "+QString::number(RotateNum));
@@ -111,16 +100,7 @@ void MainWindow::on_generateButton_clicked()
 
     if(!QDir("newData/Neg").exists())
         QDir().mkdir("newData/Neg");
-    if(negEnable)
-    {
-        //negfile = new QFile("newData/Neg/Info.txt");
-//        if(!negfile->open(QIODevice::WriteOnly))
-//        {
-//            ui->LogTextBrowser->append("Error occured in Open Info.txt File");
-//            return;
-//        }
-        //negtext = new QTextStream(negfile);
-    }
+
     ui->LogTextBrowser->append("\nNegative Data");
     ui->LogTextBrowser->append("Need To Generate: "+negGenerate);
     ui->LogTextBrowser->append("Total Neg Num: "+QString::number(negNum));
@@ -135,7 +115,6 @@ void MainWindow::on_generateButton_clicked()
     connect(generateData,SIGNAL(sendStoreNegImage(QString)),this,SLOT(getNegImage(QString)));
 
     connect(generateData,SIGNAL(sendCompleted()),this,SLOT(processingEnding()));
-//    qstore = new QuickStore();
     generateData->start();
 
 }
@@ -149,13 +128,11 @@ void MainWindow::on_NegativeLoadButton_clicked()
                                                           "Images (*.png *.bmp *.jpg)");
     if(listNames.isEmpty())
         return;
-    //negListNames = (QString *)malloc(sizeof(QString)*listNames.size());
 
     negListNames = listNames;
     ui->NegativeLineEdit->setText(negListNames[0]);
     ui->spinBox_NegativeGenerate->setEnabled(true);
     ui->generateButton->setEnabled(ui->spinBox_Deformation->isEnabled() || ui->spinBox_Rotation->isEnabled() || ui->spinBox_Light->isEnabled()|| ui->spinBox_NegativeGenerate->isEnabled());
-
 }
 
 void MainWindow::on_PositiveLoadButton_clicked()
@@ -166,7 +143,6 @@ void MainWindow::on_PositiveLoadButton_clicked()
                                                          "Images (*.png *.bmp *.jpg)");
     if(listNames.isEmpty() )
         return;
-    //posListNames = (QString *)malloc(sizeof(QString)*listNames.size());
     posListNames = listNames;
     ui->PositiveLineEdit->setText(posListNames[0]);
 }
@@ -183,46 +159,17 @@ void MainWindow::getProgress(int progress)
 
 void MainWindow::getPosImage(QString file)
 {
-//    QString file = QDir::currentPath()+"/newData/Pos/"+QString::number(pos_name)+".jpg";
-//    qstore->setImage(file,pos);
-//    qstore->start();
-    //cv::imwrite(file.toStdString(),pos);
-//    pos_name++;
     ui->LogTextBrowser->append("Save as"+file);
-//    if(postext)
-//        postext->operator <<(file)<<" 1 0 0 "<<pos.cols<<" "<<pos.rows<<"\n";
 }
 
 void MainWindow::getNegImage(QString file)
 {
-//    QString file = QDir::currentPath()+"/newData/Neg/"+QString::number(neg_name)+".jpg";
-//    qstore->setImage(file,neg);
-//    qstore->start();
-    //cv::imwrite(file.toStdString(),neg);
-//    neg_name++;
     ui->LogTextBrowser->append("Save as"+file);
-//    if(negtext)
-//        negtext->operator <<(file)<<"\n";//<<" 1 0 0 "<<neg.cols<<" "<<neg.rows<<"\n";
 }
 
 void MainWindow::processingEnding()
 {
-//    if(posfile)
-//    {
-//        posfile->close();
-//        delete postext;
-//        delete posfile;
-//    }
-//    if(negfile)
-//    {
-//        negfile->close();
-//        delete negtext;
-//        delete negfile;
-//    }
-//    pos_name = 0;
-//    neg_name = 0;
     ui->LogTextBrowser->append("Done");
-//    delete qstore;
     ui->generateButton->setEnabled(true);
     delete generateData;
 }
